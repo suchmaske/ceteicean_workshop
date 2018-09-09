@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CETEIcean Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/CETEIcean.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/custom.css"/>
+    <script src="js/CETEI.js"></script>
+</head>
+<body>
+        <div id="TEI"></div>
+        <script>
+          var CETEIcean = new CETEI();
+          CETEIcean.addBehaviors({
+            handlers: {
+              "supplied": [ "[", "]" ],
+              "persName": function(el) {
+                let a = document.createElement("a");
+                a.setAttribute("href", el.getAttribute("ref"));
+                a.setAttribute("target", "_blank");
+                a.innerHTML = el.innerHTML;
+                return a;
+              },
+              "placeName": function(el) {
+                let a = document.createElement("a");
+                a.setAttribute("href", el.getAttribute("ref"));
+                a.setAttribute("target", "_blank");
+                a.innerHTML = el.innerHTML;
+                return a;
+              }
+            },
+          });
+          CETEIcean.getHTML5("data/avh.xml", function(data) {
+            document.getElementById("TEI").appendChild(data);
+            let substitutions = document.querySelectorAll("tei-subst");
+            substitutions.forEach(function(subst) {
+            subst.querySelector("tei-add").addEventListener("click", function() {
+              let del = subst.querySelector("tei-del");
+              if (window.getComputedStyle(del).getPropertyValue("display") === "none") {
+                del.style.display = "inline";
+              } else {
+                del.style.display = "none";
+              }    
+            });
+
+            let choices = document.querySelectorAll("tei-choice");
+            choices.forEach(function(choice) {
+            
+            });
+          })
+        });
+        </script>
+     
+</body>
+</html>
